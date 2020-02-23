@@ -23,6 +23,9 @@ class SoundsController extends Controller
         
         unset($form['_token']);
         
+        $article->fill($form);
+        $article->save();
+        
         return redirect('admin/article/create');
     }
 }
