@@ -39,4 +39,31 @@ class SoundsController extends Controller
         }
         return view('admin.article.index', ['posts' => $posts, 'cond_title' => $cond_title]);
         }
+        
+        
+         public function edit(Request $request)
+  {
+      // News Modelからデータを取得する
+      $article = Article::find($request->id);
+      if (empty($article)) {
+        abort(404);    
+      }
+      return view('admin.article.edit', ['article_form' => $article]);
+  }
+
+
+    public function update(Request $request)
+   {
+       
+       $this->validate($request, Article::$rules);
+      
+      $article = Article::find($request->id);
+      
+      $article_form = $request->all();
+      unset($article_form['_token']);
+
+      $article->fill($article_form)->save();
+
+      return redirect('admin/article');
+  }
     }

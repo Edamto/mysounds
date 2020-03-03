@@ -6,6 +6,15 @@
         <div class="row">
             <h2>記事一覧</h2>
         </div>
+        
+         @if (count($errors) > 0)
+                <ul>
+                   @foreach($errors->all() as $e)
+                   <li>{{ $e }}</li>
+              @endforeach
+                    </ul>
+                    @endif
+                    
         <div class="row">
             <div class="col-md-4">
                 <a href="{{ action('Admin\SoundsController@add') }}" role="button" class="btn btn-primary">記事作成</a>
